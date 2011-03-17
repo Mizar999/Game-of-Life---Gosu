@@ -23,6 +23,16 @@ class TestCellGrid < Test::Unit::TestCase
     assert_equal(1, grid.living_cells)
   end
   
+  def test_count_neighbours
+    grid = CellGrid.new(:rows => 3, :columns => 3)
+    assert_equal(0, grid.neighbours(1, 1), "o = living cells; x = tested cell:\n...\n.x.\n...")
+    grid.set_cell_state(0, 0, CellState::Alive)
+    grid.set_cell_state(2, 2, CellState::Revived)
+    assert_equal(2, grid.neighbours(1, 1), "o = living cells; x = tested cell:\no..\n.x.\n..o")
+    grid.set_cell_state(1, 0, CellState::Alive)
+    assert_equal(3, grid.neighbours(1, 2), "o = living cells; x = tested cell:\no..\no.x\n..o")
+  end
+  
   def test_get_states
     grid = CellGrid.new(:rows => 2, :columns => 4)
     assert_equal(CellState::Dead, grid.get_cell_state(1, 2))
