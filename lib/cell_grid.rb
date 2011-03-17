@@ -25,4 +25,11 @@ class CellGrid
     end
     @cells[row * @columns + column] = state
   end
+  
+  def get_cell_state(row, column)
+    if row >= @rows or column >= @columns
+      raise IndexError, "%d rows, %d columns; but index was [%d;%d]" % [@rows, @columns, row, column]
+    end
+    @cells[row * @columns + column]
+  end
 end
