@@ -1,1 +1,10 @@
 This is the readme file for the Game of Life - Gosu project.
+
+Running
+=======
+
+You need to install the gosu gem first:
+$ gem install gosu
+
+Run the main.rb file to start the game:
+$ ruby main.rb
