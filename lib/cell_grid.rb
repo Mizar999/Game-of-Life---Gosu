@@ -55,7 +55,7 @@ class CellGrid
     str = ""
     for row in 0...@rows
       for column in 0...@columns
-        cell = @cells[row * @columns + column]
+        cell = get_cell_state(row, column)
         if cell != CellState::Dead
           str += cell.to_s
         else
