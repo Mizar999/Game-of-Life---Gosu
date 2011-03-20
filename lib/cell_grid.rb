@@ -15,7 +15,7 @@ class CellGrid
 
   def living_cells
     @cells.select do |cell|
-      cell == CellState::Alive or cell == CellState::Revived
+      cell != CellState::Dead
     end.length
   end
   
@@ -38,20 +38,24 @@ class CellGrid
         end
       end
     end
-    cell_neighbours
+    cell_neighbours    
   end
   
   def set_cell_state(row, column, state)
-    if row >= @rows or column >= @columns
-      raise IndexError, "%d rows, %d columns; but index was [%d;%d]" % [@rows, @columns, row, column]
-    end
+    check_index(row, column)
     @cells[row * @columns + column] = state
   end
   
   def get_cell_state(row, column)
+    check_index(row, column)
+    @cells[row * @columns + column]
+  end
+  
+  private
+  
+  def check_index(row, column)
     if row >= @rows or column >= @columns
       raise IndexError, "%d rows, %d columns; but index was [%d;%d]" % [@rows, @columns, row, column]
     end
-    @cells[row * @columns + column]
   end
 end
