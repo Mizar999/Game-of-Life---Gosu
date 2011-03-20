@@ -51,11 +51,27 @@ class CellGrid
     @cells[row * @columns + column]
   end
   
+  def to_s
+    str = ""
+    for row in 0...@rows
+      for column in 0...@columns
+        cell = @cells[row * @columns + column]
+        if cell != CellState::Dead
+          str += cell.to_s
+        else
+          str += "."
+        end
+      end
+      str += "\n"
+    end
+    str
+  end
+  
   private
   
   def check_index(row, column)
     if row >= @rows or column >= @columns
       raise IndexError, "%d rows, %d columns; but index was [%d;%d]" % [@rows, @columns, row, column]
     end
-  end
+  end  
 end
