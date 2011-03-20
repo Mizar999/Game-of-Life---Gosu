@@ -1,9 +1,10 @@
+files = ["../lib/cell_grid", "../lib/cell_state"]
 begin
-  ["../lib/cell_grid", "../lib/cell_state"].each do |filename|
+  files.each do |filename|
     require_relative filename
   end
 rescue NoMethodError
-  ["../lib/cell_grid", "../lib/cell_state"].each do |filename|
+  files.each do |filename|
     require filename
   end
 end
