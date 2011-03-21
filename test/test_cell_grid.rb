@@ -41,12 +41,10 @@ class TestCellGrid < Test::Unit::TestCase
   end
   
   def test_grid_infos    
-    assert_equal(3, @grid.rows)
-    assert_equal(3, @grid.columns)
+    assert_rows_and_columns(3, 3)
     @grid.rows = 4
     @grid.columns = 5
-    assert_equal(4, @grid.rows)
-    assert_equal(5, @grid.columns)
+    assert_rows_and_columns(4, 5)
   end
   
   def test_valid_arguments    
@@ -60,5 +58,12 @@ class TestCellGrid < Test::Unit::TestCase
     assert_equal("...\n...\n...\n", @grid.to_s)
     @grid.set_cell_state(1, 2, CellState::Alive)
     assert_equal("...\n..#{CellState::Alive}\n...\n", @grid.to_s)
+  end
+  
+  private
+  
+  def assert_rows_and_columns(rows, columns)
+    assert_equal(rows, @grid.rows)
+    assert_equal(columns, @grid.columns)
   end
 end
