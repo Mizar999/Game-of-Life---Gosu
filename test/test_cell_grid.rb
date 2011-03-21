@@ -26,12 +26,11 @@ class TestCellGrid < Test::Unit::TestCase
     assert_equal(1, @grid.living_cells)
   end
   
-  def test_count_neighbours    
-    assert_equal(0, @grid.neighbours(1, 1))
+  def test_count_neighbours
+    assert_equal(0, @grid.neighbours(1, 2))
     @grid.set_cell_state(0, 0, CellState::Alive)
-    @grid.set_cell_state(2, 2, CellState::Revived)
-    assert_equal(2, @grid.neighbours(1, 1))
-    @grid.set_cell_state(1, 0, CellState::Alive)
+    @grid.set_cell_state(1, 0, CellState::Revived)
+    @grid.set_cell_state(2, 2, CellState::Alive)
     assert_equal(3, @grid.neighbours(1, 2))
   end
   
