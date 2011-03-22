@@ -5,12 +5,22 @@ rescue NoMethodError
 end
 
 class CellGrid
-  attr_accessor :rows, :columns
+  attr_reader :rows, :columns
   
   def initialize(params = Hash.new)
     @rows = params[:rows] || 0
     @columns = params[:columns] || 0
     @cells = Array.new(@rows * @columns, CellState::Dead)
+  end
+  
+  def rows=(rows)
+    @rows = rows
+    update_grid_size
+  end
+  
+  def columns=(columns)
+    @columns = columns
+    update_grid_size
   end
 
   def living_cells
@@ -83,6 +93,17 @@ class CellGrid
       row = 0
     end
     row
+  end
+  
+  def update_grid_size
+    temp = @cells
+    @cells = Array.new(@rows * @columns, CellState::Dead)
+    @cells.each_index do |index|
+      if index >= temp.length
+        break
+      end
+      @cells[index] = temp[index]
+    end
   end
   
   def string_representation_of_cell(row, column)

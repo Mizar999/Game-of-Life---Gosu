@@ -42,9 +42,21 @@ class TestCellGrid < Test::Unit::TestCase
   
   def test_grid_infos    
     assert_rows_and_columns(3, 3)
-    @grid.rows = 4
-    @grid.columns = 5
+    change_grid_size(4, 5)
     assert_rows_and_columns(4, 5)
+  end
+  
+  def test_enlarge_grid_size
+    @grid.set_cell_state(0, 0, CellState::Alive)
+    change_grid_size(4, 5)
+    assert_equal(CellState::Alive, @grid.get_cell_state(0, 0))
+    assert_equal(CellState::Dead, @grid.get_cell_state(3, 4))
+  end
+  
+  def test_shrink_grid_size
+    @grid.set_cell_state(0, 0, CellState::Alive)
+    change_grid_size(1, 1)
+    assert_equal(CellState::Alive, @grid.get_cell_state(0, 0))
   end
   
   def test_valid_arguments    
@@ -65,5 +77,10 @@ class TestCellGrid < Test::Unit::TestCase
   def assert_rows_and_columns(rows, columns)
     assert_equal(rows, @grid.rows)
     assert_equal(columns, @grid.columns)
+  end
+  
+  def change_grid_size(new_rows, new_columns)
+    @grid.rows = new_rows
+    @grid.columns = new_columns
   end
 end
