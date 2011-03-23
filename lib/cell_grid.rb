@@ -41,7 +41,7 @@ class CellGrid
         end
       end
     end
-    cell_neighbours    
+    cell_neighbours
   end
   
   def set_cell_state(row, column, state)

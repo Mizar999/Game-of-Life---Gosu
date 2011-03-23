@@ -16,7 +16,7 @@ class TestCellGrid < Test::Unit::TestCase
     @grid = CellGrid.new(:rows => 3, :columns => 3)
   end
   
-  def test_initialize    
+  def test_initialize
     assert_not_nil(@grid)
   end
   
@@ -40,7 +40,7 @@ class TestCellGrid < Test::Unit::TestCase
     assert_equal(CellState::Alive, @grid.get_cell_state(1, 2))
   end
   
-  def test_grid_infos    
+  def test_grid_infos
     assert_rows_and_columns(3, 3)
     change_grid_size(4, 5)
     assert_rows_and_columns(4, 5)
@@ -59,7 +59,7 @@ class TestCellGrid < Test::Unit::TestCase
     assert_equal(CellState::Alive, @grid.get_cell_state(0, 0))
   end
   
-  def test_valid_arguments    
+  def test_valid_arguments
     assert_raise(IndexError) { @grid.set_cell_state(4, 0, CellState::Alive) }
     assert_raise(IndexError) { @grid.set_cell_state(2, 4, CellState::Alive) }
     assert_raise(IndexError) { @grid.get_cell_state(5, 1) }
