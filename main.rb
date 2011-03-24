@@ -6,7 +6,7 @@ class GameOfLifeWindow < Gosu::Window
     super(640, 480, false)
     self.caption = "Game of Life - Gosu"
   end
-  
+
   def button_down(id)
     case id
     when Gosu::KbEscape
