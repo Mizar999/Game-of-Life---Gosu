@@ -1,3 +1,10 @@
+file = "rect.rb"
+begin
+  require_relative file
+rescue NoMethodError
+  require file
+end
+
 class CellGridView
   attr_accessor :x, :y, :cell_width, :cell_height
   attr_accessor :color_alive, :color_dead, :color_revived
@@ -12,6 +19,19 @@ class CellGridView
     @color_alive = params[:color_alive] || 0xff000000
     @color_dead = params[:color_dead] || 0xff000000
     @color_revived = params[:color_revived] || 0xff000000
+    
+    @rect = Rect.new(:z_order => params[:z_order] || 0) # maybe needs a test
+    update_rect
+  end
+
+  def cell_width=(cell_width)
+    @cell_width = cell_width
+    update_rect
+  end
+
+  def cell_height=(cell_height)
+    @cell_height = cell_height
+    update_rect
   end
 
   def total_width
@@ -20,5 +40,32 @@ class CellGridView
 
   def total_height
     @cell_grid.rows * @cell_height
+  end
+
+  def draw(window)
+    for row in 0...@cell_grid.rows
+      @rect.y = row * @cell_height + @y
+      for column in 0...@cell_grid.columns
+        @rect.x = column * @cell_width + @x
+       
+        case @cell_grid.get_cell_state(row, column)
+        when CellState::Alive
+          @rect.color = @color_alive
+        when CellState::Dead
+          @rect.color = @color_dead
+        when CellState::Revived
+          @rect.color = @color_revived
+        end
+
+        @rect.draw(window)
+      end
+    end
+  end
+
+  private
+
+  def update_rect
+    @rect.width = @cell_width
+    @rect.height = @cell_height
   end
 end
