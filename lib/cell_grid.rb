@@ -54,7 +54,7 @@ class CellGrid
     @cells[row * @columns + column]
   end
 
-  def each
+  def each_cell_info
     for row in 0...@rows
       for column in 0...@columns
         yield row, column, get_cell_state(row, column)

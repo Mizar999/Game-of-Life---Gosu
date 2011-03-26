@@ -43,7 +43,7 @@ class CellGridView
   end
 
   def draw(window)
-    @cell_grid.each do |row, column, state|
+    @cell_grid.each_cell_info do |row, column, state|
       @rect.x = column * @cell_width + @x
       @rect.y = row * @cell_height + @y
       case state

@@ -66,8 +66,8 @@ class TestCellGrid < Test::Unit::TestCase
     assert_raise(IndexError) { @grid.get_cell_state(1, 5) }
   end
   
-  def test_each_method
-    @grid.each do |row, column, state|
+  def test_cell_infos
+    @grid.each_cell_info do |row, column, state|
       assert_equal(@grid.get_cell_state(row, column), state)
     end
   end
