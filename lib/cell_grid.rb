@@ -53,16 +53,13 @@ class CellGrid
     check_index(row, column)
     @cells[row * @columns + column]
   end
-  
-  def to_s
-    str = ""
+
+  def each
     for row in 0...@rows
       for column in 0...@columns
-        str += string_representation_of_cell(row, column)
+        yield row, column, get_cell_state(row, column)
       end
-      str += "\n"
     end
-    str
   end
   
   private
@@ -104,13 +101,5 @@ class CellGrid
       end
       @cells[index] = temp[index]
     end
-  end
-  
-  def string_representation_of_cell(row, column)
-    cell = get_cell_state(row, column)
-    if cell != CellState::Dead
-      return cell.to_s
-    end
-    return "."
   end
 end

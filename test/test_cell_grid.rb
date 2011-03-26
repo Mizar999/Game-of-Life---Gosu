@@ -66,10 +66,10 @@ class TestCellGrid < Test::Unit::TestCase
     assert_raise(IndexError) { @grid.get_cell_state(1, 5) }
   end
   
-  def test_cell_grid_to_s
-    assert_equal("...\n...\n...\n", @grid.to_s)
-    @grid.set_cell_state(1, 2, CellState::Alive)
-    assert_equal("...\n..#{CellState::Alive}\n...\n", @grid.to_s)
+  def test_each_method
+    @grid.each do |row, column, state|
+      assert_equal(@grid.get_cell_state(row, column), state)
+    end
   end
   
   private

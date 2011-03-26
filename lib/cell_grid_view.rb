@@ -43,22 +43,18 @@ class CellGridView
   end
 
   def draw(window)
-    for row in 0...@cell_grid.rows
+    @cell_grid.each do |row, column, state|
+      @rect.x = column * @cell_width + @x
       @rect.y = row * @cell_height + @y
-      for column in 0...@cell_grid.columns
-        @rect.x = column * @cell_width + @x
-       
-        case @cell_grid.get_cell_state(row, column)
-        when CellState::Alive
-          @rect.color = @color_alive
-        when CellState::Dead
-          @rect.color = @color_dead
-        when CellState::Revived
-          @rect.color = @color_revived
-        end
-
-        @rect.draw(window)
+      case state
+      when CellState::Alive
+        @rect.color = @color_alive
+      when CellState::Dead
+        @rect.color = @color_dead
+      when CellState::Revived
+        @rect.color = @color_revived
       end
+      @rect.draw(window)
     end
   end
 

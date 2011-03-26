@@ -14,16 +14,16 @@ require "gosu"
 
 class GameOfLifeWindow < Gosu::Window
   def initialize
-    super(640, 480, false)
+    super(645, 485, false)
     self.caption = "Game of Life - Gosu"
 
-    grid = CellGrid.new(:rows => 3, :columns => 3)
+    grid = CellGrid.new(:rows => 10, :columns => 15)
     grid.set_cell_state(0, 0, CellState::Alive)
     grid.set_cell_state(1, 0, CellState::Dead)
     grid.set_cell_state(0, 2, CellState::Revived)
     @grid_view = CellGridView.new(:cell_grid => grid,
-                                  :cell_width => 25,
-                                  :cell_height => 25,
+                                  :cell_width => 20,
+                                  :cell_height => 20,
                                   :color_alive => 0xff00ff00,
                                   :color_dead => 0xffff0000,
                                   :color_revived => 0xff0000ff)
