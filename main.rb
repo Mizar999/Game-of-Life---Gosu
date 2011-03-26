@@ -14,7 +14,7 @@ require "gosu"
 
 class GameOfLifeWindow < Gosu::Window
   def initialize
-    super(645, 485, false)
+    super(640, 480, false)
     self.caption = "Game of Life - Gosu"
 
     grid = CellGrid.new(:rows => 10, :columns => 15)
