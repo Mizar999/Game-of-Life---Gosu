@@ -6,5 +6,20 @@ Running
 You need to install the gosu gem first:
 $ gem install gosu
 
-Run the main.rb file to start the game:
+Run the main.rb file to start the application:
 $ ruby main.rb
+
+Controls
+========
+
+  Key    |       Action
+---------+----------------------
+<Space>  | Simulate the next round
+<Return> | Repopulate the field
+<Escape> | Quit the application
+
+Colors
+======
+Green => This cell is alive.
+Blue  => This cell was revived.
+White => This cell is dead.

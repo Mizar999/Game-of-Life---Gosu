@@ -1,4 +1,4 @@
-files = ["lib/cell_grid.rb", "lib/cell_grid_view.rb", "lib/cell_state.rb"]
+files = ["lib/cell_grid.rb", "lib/cell_grid_view.rb", "lib/cell_state.rb", "lib/cell_rules.rb"]
 begin
   files.each do |filename|
     require_relative filename
@@ -17,17 +17,16 @@ class GameOfLifeWindow < Gosu::Window
     super(640, 480, false)
     self.caption = "Game of Life - Gosu"
     
-    grid = CellGrid.new(:rows => 10, :columns => 15)
-    grid.set_cell_state(0, 0, CellState::Alive)
-    grid.set_cell_state(1, 0, CellState::Dead)
-    grid.set_cell_state(0, 2, CellState::Revived)
+    @grid = CellGrid.new(:rows => 24, :columns => 32)
+    populate_cell_grid
 
-    @grid_view = CellGridView.new(:cell_grid => grid,
+    @grid_view = CellGridView.new(:cell_grid => @grid,
                                   :cell_width => 20,
                                   :cell_height => 20,
                                   :color_alive => 0xff00ff00,
-                                  :color_dead => 0xffff0000,
+                                  :color_dead => 0xffffffff,
                                   :color_revived => 0xff0000ff)
+    @rules = CellRules.new
   end
 
   def draw
@@ -38,6 +37,18 @@ class GameOfLifeWindow < Gosu::Window
     case id
     when Gosu::KbEscape
       close
+    when Gosu::KbSpace
+      @rules.update(@grid)
+    when Gosu::KbReturn
+      populate_cell_grid
+    end
+  end
+
+  private
+
+  def populate_cell_grid
+    @grid.each_cell_info do |row, column|
+      @grid.set_cell_state(row, column, rand(2) < 1 ? CellState::Alive : CellState::Dead)
     end
   end
 end
