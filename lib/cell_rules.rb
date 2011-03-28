@@ -1,3 +1,14 @@
+files = ["cell_grid.rb", "cell_state.rb"]
+begin
+  files.each do |filename|
+    require_relative filename
+  end
+rescue
+  files.each do |filename|
+    require filename
+  end
+end
+
 class CellRules
   def update(cell_grid)
     result = Array.new(cell_grid.rows)
