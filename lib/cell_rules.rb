@@ -66,9 +66,9 @@ class CellRules
     temp
   end
 
-  def update_old_data(old_data, new_data)
-    old_data.each_cell_info do |row, column|
-      old_data.set_cell_state(row, column, new_data[row][column])
+  def update_cell_grid(cell_grid, new_data)
+    cell_grid.each_cell_info do |row, column|
+      cell_grid.set_cell_state(row, column, new_data[row][column])
     end
   end
 end

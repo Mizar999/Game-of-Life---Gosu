@@ -20,6 +20,7 @@ Controls
 
 Colors
 ======
+
 Green => This cell is alive.
 Blue  => This cell was revived.
 White => This cell is dead.
