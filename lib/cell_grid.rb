@@ -96,9 +96,7 @@ class CellGrid
     temp = @cells
     @cells = Array.new(@rows * @columns, CellState::Dead)
     @cells.each_index do |index|
-      if index >= temp.length
-        break
-      end
+      break if index >= temp.length
       @cells[index] = temp[index]
     end
   end

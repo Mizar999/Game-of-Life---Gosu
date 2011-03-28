@@ -16,11 +16,12 @@ class GameOfLifeWindow < Gosu::Window
   def initialize
     super(640, 480, false)
     self.caption = "Game of Life - Gosu"
-
+    
     grid = CellGrid.new(:rows => 10, :columns => 15)
     grid.set_cell_state(0, 0, CellState::Alive)
     grid.set_cell_state(1, 0, CellState::Dead)
     grid.set_cell_state(0, 2, CellState::Revived)
+
     @grid_view = CellGridView.new(:cell_grid => grid,
                                   :cell_width => 20,
                                   :cell_height => 20,
