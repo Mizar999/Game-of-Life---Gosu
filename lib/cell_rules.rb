@@ -39,7 +39,7 @@ class CellRules
 
   def update(cell_grid)
     result = simulate_next_round(cell_grid)
-    update_old_data(cell_grid, result)
+    update_cell_grid(cell_grid, result)
   end
 
   private
