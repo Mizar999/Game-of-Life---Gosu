@@ -27,6 +27,18 @@ class GameOfLifeWindow < Gosu::Window
                                   :color_dead => 0xffffffff,
                                   :color_revived => 0xff0000ff)
     @rules = CellRules.new
+    @auto_mode = false
+    @counter = 0
+  end
+
+  def update
+    if @auto_mode
+      @counter += 1
+      if @counter >= 10
+	@rules.update(@grid)
+	@counter = 0
+      end
+    end
   end
 
   def draw
@@ -41,7 +53,13 @@ class GameOfLifeWindow < Gosu::Window
       @rules.update(@grid)
     when Gosu::KbReturn
       populate_cell_grid
+    when Gosu::KbA
+      @auto_mode = !@auto_mode
     end
+  end
+
+  def needs_cursor?
+    true
   end
 
   private
